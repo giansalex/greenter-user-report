@@ -1,3 +1,8 @@
+<?php
+require __DIR__.'/lib.php';
+
+$s = new Security(new UserRepository());
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -22,6 +27,7 @@
             </button>
             <a class="navbar-brand">XML to PDF</a>
         </div>
+        <?php if ($s->isLoggin()): ?>
         <div class="collapse navbar-collapse" id="menu-nav">
             <ul class="nav navbar-nav navbar-right">
                 <li>
@@ -29,23 +35,21 @@
                         <i class="fa fa-upload"></i> Upload
                     </a>
                 </li>
+
                 <li class="dropdown">
                     <a href="#" target="_self" class="dropdown-toggle" data-toggle="dropdown" title="Opciones">
                         Opciones&nbsp;
                         <i class="fa fa-cog"></i>
                     </a>
-                    <form method="post" action="/Account/LogOut" id="frmSalir"></form>
-                    <ul class="dropdown-menu">
-                        <li><a href="/bandeja" title="Bandeja">Bandeja</a></li>
-                        <li><a href="/resumen" title="Resumen">Resumen</a></li>
-                        <li><a href="/bajas" title="Bajas">C. de Bajas</a></li>
-                        <li class="divider"></li>
-                        <li><a href="/configuration" title="Configuración">Configuración</a></li>
+                    <form method="post" action="lib/logout.php" id="frmSalir"></form>
+                    <ul class="dropdown-menu">s
+                        <li><a href="settings.php" title="Configuración">Configuración</a></li>
                         <li class="divider"></li>
                         <li><a href="javascript:document.getElementById('frmSalir').submit()" title="Salir">Salir</a></li>
                     </ul>
                 </li>
             </ul>
         </div>
+        <?php endif; ?>
     </div>
 </nav>

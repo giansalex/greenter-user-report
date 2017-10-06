@@ -1,7 +1,4 @@
 <?php
-require_once __DIR__ . '/lib/head.php';
-?>
-
-<?php
-include_once __DIR__ . '/lib/footer.php';
-?>
+define('PDO_DSN', 'mysql:dbname=xmltoroot;host=localhost');
+define('PDO_USER', 'root');
+define('PDO_PASS', '');

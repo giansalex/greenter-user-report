@@ -1,4 +1,11 @@
 <?php
+require __DIR__.'/lib.php';
+
+$s = new Security(new UserRepository());
+if (!$s->isLoggin()) {
+    header('Location: login.php');
+}
+
 if (!isset($_FILES['xml']) || !isset($_FILES['logo'])) {
     header('Location: ./../index.php');
     exit();

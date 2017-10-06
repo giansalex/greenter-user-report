@@ -1,5 +1,9 @@
 <?php
 require_once __DIR__ . '/lib/head.php';
+
+if (!$s->isLoggin()) {
+    header('Location: login.php');
+}
 ?>
 <div class="container">
     <form class="form-horizontal" method="post" enctype="multipart/form-data" action="lib/print.php">
