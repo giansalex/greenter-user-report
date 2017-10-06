@@ -1,5 +1,19 @@
 <?php
 require_once __DIR__ . '/lib/head.php';
+if (isset($_POST['login'])) {
+    if (isset($_POST['email']) &&
+        isset($_POST['pass'])) {
+        $s = new Security(new UserRepository());
+        $s->login($_POST['email'], $_POST['pass']);
+
+        if ($s->isLoggin()) {
+            header('Location: index.php');
+            exit();
+        }
+
+        $message = 'Acceso denegado';
+    }
+}
 ?>
 <style>
     @import url(http://fonts.googleapis.com/css?family=Roboto);
@@ -10,15 +24,13 @@ require_once __DIR__ . '/lib/head.php';
         background-color: #F7F7F7;
         margin: 0 auto;
         border-radius: 2px;
-        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
         overflow: hidden;
-        font-family: roboto;
     }
 
     .loginmodal-container h1 {
         text-align: center;
         font-size: 1.8em;
-        font-family: roboto;
     }
 
     .loginmodal-container input[type=submit] {
@@ -50,34 +62,20 @@ require_once __DIR__ . '/lib/head.php';
         -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
         box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
     }
-
-    .loginmodal {
-        text-align: center;
-        font-size: 14px;
-        font-family: 'Arial', sans-serif;
-        font-weight: 700;
-        height: 36px;
-        padding: 0 8px;
-        /* border-radius: 3px; */
-        /* -webkit-user-select: none;
-          user-select: none; */
-    }
-
     .loginmodal-submit {
         /* border: 1px solid #3079ed; */
-        border: 0px;
+        border: 0;
         color: #fff;
         text-shadow: 0 1px rgba(0,0,0,0.1);
         background-color: #4d90fe;
-        padding: 17px 0px;
-        font-family: roboto;
+        padding: 17px 0;
         font-size: 14px;
         /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#4787ed)); */
     }
 
     .loginmodal-submit:hover {
         /* border: 1px solid #2f5bb7; */
-        border: 0px;
+        border: 0;
         text-shadow: 0 1px rgba(0,0,0,0.3);
         background-color: #357ae8;
         /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#357ae8)); */
@@ -98,6 +96,13 @@ require_once __DIR__ . '/lib/head.php';
     }
 </style>
 <div class="container">
+    <?php if (isset($message)): ?>
+        <div class="alert alert-dismissible alert-warning">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <h4>Atencion!</h4>
+            <p>Error de credenciales</p>
+        </div>
+    <?php endif; ?>
     <div class="loginmodal-container">
         <h1>Login</h1><br>
         <form method="post">
@@ -114,5 +119,3 @@ require_once __DIR__ . '/lib/head.php';
 <?php
 include_once __DIR__ . '/lib/footer.php';
 ?>
-
-

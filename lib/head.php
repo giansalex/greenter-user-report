@@ -27,29 +27,34 @@ $s = new Security(new UserRepository());
             </button>
             <a class="navbar-brand">XML to PDF</a>
         </div>
-        <?php if ($s->isLoggin()): ?>
         <div class="collapse navbar-collapse" id="menu-nav">
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right" style="font-size: 18px">
+            <?php if ($s->isLoggin()): ?>
                 <li>
-                    <a href="/config.php" title="Upload">
+                    <a href="index.php" title="Upload">
                         <i class="fa fa-upload"></i> Upload
                     </a>
                 </li>
 
-                <li class="dropdown">
-                    <a href="#" target="_self" class="dropdown-toggle" data-toggle="dropdown" title="Opciones">
-                        Opciones&nbsp;
-                        <i class="fa fa-cog"></i>
+                <li>
+                    <a href="settings.php" title="config">
+                        <i class="fa fa-cog"></i> Configuracion
                     </a>
-                    <form method="post" action="lib/logout.php" id="frmSalir"></form>
-                    <ul class="dropdown-menu">s
-                        <li><a href="settings.php" title="Configuración">Configuración</a></li>
-                        <li class="divider"></li>
-                        <li><a href="javascript:document.getElementById('frmSalir').submit()" title="Salir">Salir</a></li>
-                    </ul>
                 </li>
+                <li>
+                    <a href="lib/logout.php" title="Logout">
+                        <i class="fa fa-toggle-on"></i> Logout
+                    </a>
+                </li>
+            <?php else: ?>
+                <li>
+                    <a href="login.php" title="Login">
+                        <i class="fa fa-toggle-off"></i> Login
+                    </a>
+                </li>
+            <?php endif; ?>
             </ul>
         </div>
-        <?php endif; ?>
+
     </div>
 </nav>

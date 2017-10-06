@@ -21,7 +21,6 @@ class Security
      */
     public function __construct(UserRepository $repository)
     {
-        session_start();
         $this->repository = $repository;
         $this->tryGetUser();
     }
@@ -34,7 +33,8 @@ class Security
     {
         $user = new User();
         $user->setEmail($email)
-            ->setPlainPassword($password);
+            ->setPlainPassword($password)
+            ->setEnable(true);
 
         $this->repository->add($user);
         $this->saveSession($user);
@@ -49,6 +49,8 @@ class Security
         }
         $this->saveSession($user);
         $this->user = $user;
+
+        return true;
     }
 
     /**
@@ -57,6 +59,14 @@ class Security
     public function isLoggin()
     {
         return !empty($this->user);
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 
     public function logout()
