@@ -25,6 +25,20 @@ class UserRepository
     }
 
     /**
+     * @param string $email
+     * @return bool
+     */
+    public function exist($email)
+    {
+        $con = DbConnection::createConnection();
+        $stm = $con->prepare('SELECT COUNT(id) FROM `user` WHERE email = ?');
+        $stm->execute([$email]);
+        $count = $stm->fetchColumn();
+
+        return $count > 0;
+    }
+
+    /**
      * @param $email
      * @param $password
      * @return bool|User
@@ -32,7 +46,7 @@ class UserRepository
     public function get($email, $password)
     {
         $con = DbConnection::createConnection();
-        $stm = $con->prepare('SELECT id, email, password, enable FROM `user` WHERE email=? LIMIT 1');
+        $stm = $con->prepare('SELECT id, email, password, enable FROM `user` WHERE email=?');
         $stm->execute([$email]);
         /**@var $obj User */
         $obj = $stm->fetchObject(User::class);

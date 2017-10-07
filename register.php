@@ -2,9 +2,12 @@
 require_once __DIR__ . '/lib/head.php';
 if (isset($_POST['registrar'])) {
     $s = new Security(new UserRepository());
-    $s->register($_POST['email'],$_POST['password']);
+    $r = $s->register($_POST['email'],$_POST['password']);
 
-    if ($s->isLoggin()) {
+    if ($r === FALSE) {
+        $exist = true;
+    }
+    else if ($s->isLoggin()) {
         header('Location: index.php');
         exit();
     }
@@ -79,6 +82,13 @@ if (isset($_POST['registrar'])) {
     }
 </style>
 <div class="container">
+    <?php if (isset($exist)): ?>
+        <div class="alert alert-dismissible alert-warning">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <h4>Atencion!</h4>
+            <p>Email ya se encuentra registrado.</p>
+        </div>
+    <?php endif; ?>
     <section class="login-form">
         <div class="panel panel-default">
             <form method="post" action="">

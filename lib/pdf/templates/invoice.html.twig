@@ -220,21 +220,28 @@
         <tfoot>
         <tr>
             <td colspan="2"></td>
-            <td colspan="2">Operaciones Gravadas</td>
+            <td colspan="2">Op. Gravadas</td>
             <td>{{ moneda }}{{ doc.mtoOperGravadas|number_format(2, '.', '') }}</td>
         </tr>
         {% if doc.mtoOperInafectas %}
             <tr>
                 <td colspan="2"></td>
-                <td colspan="2">Operaciones Inafectas</td>
+                <td colspan="2">Op. Inafectas</td>
                 <td>{{ moneda }}{{  doc.mtoOperInafectas|number_format(2, '.', '') }}</td>
             </tr>
         {% endif %}
         {% if doc.mtoOperExoneradas %}
             <tr>
                 <td colspan="2"></td>
-                <td colspan="2">Operaciones Exoneradas</td>
+                <td colspan="2">Op. Exoneradas</td>
                 <td>{{ moneda }}{{  doc.mtoOperExoneradas|number_format(2, '.', '') }}</td>
+            </tr>
+        {% endif %}
+        {% if doc.mtoOperGratuitas %}
+            <tr>
+                <td colspan="2"></td>
+                <td colspan="2">Op. Gratuitas</td>
+                <td>{{ moneda }}{{  doc.mtoOperGratuitas|number_format(2, '.', '') }}</td>
             </tr>
         {% endif %}
         <tr>

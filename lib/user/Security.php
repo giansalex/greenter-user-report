@@ -25,12 +25,11 @@ class Security
         $this->tryGetUser();
     }
 
-    /**
-     * @param $email
-     * @param $password
-     */
     public function register($email, $password)
     {
+        if ($this->repository->exist($email)) {
+            return FALSE;
+        }
         $user = new User();
         $user->setEmail($email)
             ->setPlainPassword($password)
@@ -39,6 +38,8 @@ class Security
         $this->repository->add($user);
         $this->saveSession($user);
         $this->user = $user;
+
+        return true;
     }
 
     public function login($email, $password)

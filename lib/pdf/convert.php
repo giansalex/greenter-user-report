@@ -27,8 +27,6 @@ class Convert
         $report = new \Greenter\Report\HtmlReport(__DIR__.'/templates', ['cache' => sys_get_temp_dir()]);
         $report->setTemplate('invoice.html.twig');
         $html = $report->build($doc, $parameters);
-        $inv = new \Greenter\Model\Sale\Invoice();
-        $inv->getFechaEmision();
 
         return $html;
     }

@@ -16,9 +16,12 @@ if (isset($_POST['save']) && isset($_FILES['logo']) &&
     if($check !== false) {
         $name = md5(uniqid()).'.'. pathinfo($_FILES['logo']['name'], PATHINFO_EXTENSION);
         $target_file = UPLOAD_DIR . DIRECTORY_SEPARATOR . $name;
-        $old_file = UPLOAD_DIR . DIRECTORY_SEPARATOR . $setting->getLogo();
         move_uploaded_file($tempPath, $target_file);
-        unlink($old_file);
+
+        if ($setting->getLogo()) {
+            $old_file = UPLOAD_DIR . DIRECTORY_SEPARATOR . $setting->getLogo();
+            unlink($old_file);
+        }
 
         $setting = new Setting();
         $setting->setLogo($name)
