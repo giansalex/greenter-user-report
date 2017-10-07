@@ -1,9 +1,8 @@
 <?php
-require_once __DIR__ . '/lib/head.php';
+require_once __DIR__ . '/lib/lib.php';
 if (isset($_POST['login'])) {
     if (isset($_POST['email']) &&
         isset($_POST['pass'])) {
-        $s = new Security(new UserRepository());
         $s->login($_POST['email'], $_POST['pass']);
 
         if ($s->isLoggin()) {
@@ -14,6 +13,7 @@ if (isset($_POST['login'])) {
         $message = 'Acceso denegado';
     }
 }
+include __DIR__ . '/lib/head.php';
 ?>
 <style>
     @import url(http://fonts.googleapis.com/css?family=Roboto);

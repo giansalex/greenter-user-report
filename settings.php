@@ -1,7 +1,5 @@
 <?php
-require_once __DIR__ . '/lib/head.php';
-$repo = new UserRepository();
-$s = new Security($repo);
+require_once __DIR__ . '/lib/lib.php';;
 if (!$s->isLoggin()) {
     header('Location: login.php');
     exit();
@@ -32,6 +30,7 @@ if (isset($_POST['save']) && isset($_FILES['logo']) &&
         $saved = true;
     }
 }
+include __DIR__ . '/lib/head.php'
 ?>
 <div class="container">
     <?php if (isset($saved)): ?>

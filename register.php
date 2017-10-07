@@ -1,5 +1,6 @@
 <?php
-require_once __DIR__ . '/lib/head.php';
+require_once __DIR__ . '/lib/lib.php';
+
 if (isset($_POST['registrar'])) {
     $s = new Security(new UserRepository());
     $r = $s->register($_POST['email'],$_POST['password']);
@@ -12,6 +13,8 @@ if (isset($_POST['registrar'])) {
         exit();
     }
 }
+
+include __DIR__ . '/lib/head.php';
 ?>
 <style>
     * {

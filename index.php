@@ -1,12 +1,11 @@
 <?php
-require_once __DIR__ . '/lib/head.php';
+require_once __DIR__ . '/lib/lib.php';
 
 if (!$s->isLoggin()) {
     header('Location: login.php');
     exit();
 }
-
-if (isset($_POST['']))
+include __DIR__ . '/lib/head.php';
 ?>
 <div class="container">
     <form class="form-horizontal" method="post" enctype="multipart/form-data" action="print.php">

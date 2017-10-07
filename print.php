@@ -2,8 +2,6 @@
 require __DIR__ . '/lib/lib.php';
 require __DIR__ . '/lib/pdf/convert.php';
 
-$repo = new UserRepository();
-$s = new Security($repo);
 if (!$s->isLoggin()) {
     header('Location: login.php');
     exit();

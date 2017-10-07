@@ -1,8 +1,3 @@
-<?php
-require __DIR__.'/lib.php';
-
-$s = new Security(new UserRepository());
-?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -31,7 +26,7 @@ $s = new Security(new UserRepository());
             <ul class="nav navbar-nav navbar-right" style="font-size: 18px">
             <?php if ($s->isLoggin()): ?>
                 <li>
-                    <a href="index.php" title="Upload">
+                    <a href="./" title="Upload">
                         <i class="fa fa-upload"></i> Upload
                     </a>
                 </li>
