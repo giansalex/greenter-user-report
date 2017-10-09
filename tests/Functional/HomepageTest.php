@@ -7,24 +7,20 @@ class HomepageTest extends BaseTestCase
     /**
      * Test that the index route returns a rendered response containing the text 'SlimFramework' but not a greeting
      */
-    public function testGetHomepageWithoutName()
+    public function testGetLoginPage()
     {
-        $response = $this->runApp('GET', '/');
+        $response = $this->runApp('GET', '/login');
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertContains('SlimFramework', (string)$response->getBody());
-        $this->assertNotContains('Hello', (string)$response->getBody());
+        $this->assertContains('Login', (string)$response->getBody());
     }
 
-    /**
-     * Test that the index route with optional name argument returns a rendered greeting
-     */
-    public function testGetHomepageWithGreeting()
+    public function testGetRegisterPage()
     {
-        $response = $this->runApp('GET', '/name');
+        $response = $this->runApp('GET', '/register');
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertContains('Hello name!', (string)$response->getBody());
+        $this->assertContains('Login', (string)$response->getBody());
     }
 
     /**
