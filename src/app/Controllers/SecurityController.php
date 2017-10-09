@@ -72,7 +72,7 @@ class SecurityController
         $input = $request->getParsedBody();
         $invalid = false;
         if (isset($input['email']) &&
-            isset($input['pass'])) {
+            isset($input['password'])) {
             $result = $this->service->register($_POST['email'], $_POST['password']);
 
             if ($result) {
@@ -80,6 +80,7 @@ class SecurityController
             }
             $invalid = true;
         }
+
         return $this->view->render($response, 'security/register.html.twig', ['invalid' => $invalid]);
     }
 
