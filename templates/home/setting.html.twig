@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+         {% if saved %}
+        <div class="alert alert-dismissible alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Bien hecho!</strong> configuracion guardada.
+        </div>
+        {% endif %}
+        <form class="form-horizontal" method="post" action="" enctype="multipart/form-data">
+            <fieldset>
+                <legend>Configuraciones</legend>
+                <div class="row">
+                    <div class="col-md-3 hidden-xs"></div>
+                    <div class="col-md-6 col-xs-12">
+                        <div class="form-group">
+                            <label for="file" class="col-lg-2 control-label">Logo</label>
+                            <div class="col-lg-10">
+                                <input type="file" class="form-control" id="file" name="logo" accept="image/*" required>
+                            </div>
+                        </div>
+                        {% if setting.logo %}
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <div style="margin: 0 auto;display: table;">
+                                    <img src="{{ path_for('image') }}" class="img-responsive">
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <button style="margin: 30px auto;display: table;" type="submit" name="save" class="btn btn-primary">Guardar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+{% endblock %}

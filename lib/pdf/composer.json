@@ -1,8 +1,0 @@
-{
-    "require": {
-        "mikehaertl/phpwkhtmltopdf": "^2.2",
-        "greenter/report": "^1.0",
-        "ziplr/php-qr-code": "^1.0",
-        "greenter/xml-parser": "^1.0"
-    }
-}
