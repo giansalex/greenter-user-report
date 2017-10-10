@@ -48,17 +48,18 @@ class SecurityController
     public function login($request, $response, $args)
     {
         $input = $request->getParsedBody();
-        $invalid = false;
-        if (isset($input['email']) &&
+        $params =  [];
+        if (isset($input) &&
             isset($input['pass'])) {
-            $result = $this->service->login($_POST['email'], $_POST['pass']);
+            $result = $this->service->login($input['email'], $input['pass']);
 
             if ($result) {
                 return $response->withRedirect($this->router->pathFor('index'));
             }
-            $invalid = true;
+            $params['invalid'] = true;
+            $params['email'] = $input['email'];
         }
-        return $this->view->render($response, 'security/login.html.twig', ['invalid' => $invalid]);
+        return $this->view->render($response, 'security/login.html.twig', $params);
     }
 
     /**
@@ -73,7 +74,7 @@ class SecurityController
         $invalid = false;
         if (isset($input['email']) &&
             isset($input['password'])) {
-            $result = $this->service->register($_POST['email'], $_POST['password']);
+            $result = $this->service->register($input['email'], $input['password']);
 
             if ($result) {
                 return $response->withRedirect($this->router->pathFor('index'));

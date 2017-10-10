@@ -2,7 +2,11 @@
 
 {% block body %}
     <div class="container">
-        <form class="form-horizontal" method="post" enctype="multipart/form-data" action="{{ path_for('report') }}">
+        <form class="form-horizontal"
+              method="post"
+              enctype="multipart/form-data"
+              action="{{ path_for('report') }}"
+              target="_blank">
             <fieldset>
                 <legend>Cargar archivo XML</legend>
                 <div class="form-group">
