@@ -10,6 +10,7 @@ namespace Greenter\App\Services;
 
 use Greenter\App\Models\User;
 use Greenter\App\Repository\UserRepository;
+use RKA\Session;
 
 class UserService
 {
@@ -71,14 +72,13 @@ class UserService
 
     public function logout()
     {
-        unset($_SESSION['u_id']);
-        unset($_SESSION['u_email']);
-        session_destroy();
+        Session::destroy();
     }
 
     private function saveSession(User $user)
     {
-        $_SESSION['u_id'] = $user->getId();
-        $_SESSION['u_email'] = $user->getEmail();
+        $session = new Session();
+        $session->set('u_id', $user->getId());
+        $session->set('u_email', $user->getEmail());
     }
 }

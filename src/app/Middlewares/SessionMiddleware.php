@@ -9,26 +9,21 @@
 namespace Greenter\App\Middlewares;
 
 use Greenter\App\Models\User;
+use Psr\Container\ContainerInterface;
+use RKA\Session;
 use Slim\Http\Request;
 use Slim\Http\Response;
-use Slim\Router;
 
 class SessionMiddleware
 {
     /**
-     * @var Router
+     * @var ContainerInterface
      */
-    private $router;
+    private $container;
 
-    /**
-     * @var \Twig_Environment
-     */
-    private $environment;
-
-    public function __construct(Router $router, \Twig_Environment $environment) {
-
-        $this->router = $router;
-        $this->environment = $environment;
+    public function __construct(ContainerInterface $container)
+    {
+        $this->container = $container;
     }
 
     /**
@@ -44,11 +39,15 @@ class SessionMiddleware
     {
         $user = $this->tryGetUser();
         if ($user === FALSE) {
-            return $response->withRedirect($this->router->pathFor('login'));
+            /**@var $router \Slim\Router*/
+            $router = $this->container->get('router');
+            return $response->withRedirect($router->pathFor('login'));
         }
 
         $request = $request->withAttribute('user', $user);
-        $this->environment->addGlobal('user', $user);
+        /**@var $view \Slim\Views\Twig*/
+        $view = $this->container->get('view');
+        $view->getEnvironment()->addGlobal('user', $user);
 
         $response = $next($request, $response);
         return $response;
@@ -56,11 +55,14 @@ class SessionMiddleware
 
     private function tryGetUser()
     {
-        if (isset($_SESSION['u_id']) && isset($_SESSION['u_email'])) {
+        $session = new Session();
+        $id = $session->get('u_id');
+        $email = $session->get('u_email');
+        if ($id && $email) {
             /**@var $email string*/
             $email = $_SESSION['u_email'];
             $user = (new User())
-                ->setId(intval($_SESSION['u_id']))
+                ->setId(intval($id))
                 ->setEmail($email);
 
             return $user;

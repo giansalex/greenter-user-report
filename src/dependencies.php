@@ -76,7 +76,5 @@ $container[ReportController::class] = function($c) {
 };
 
 $container[SessionMiddleware::class] = function($c) {
-    $router = $c->get("router");
-    $view = $c->get("view");
-    return new SessionMiddleware($router, $view->getEnvironment());
+    return new SessionMiddleware($c);
 };
