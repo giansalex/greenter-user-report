@@ -52,7 +52,7 @@ class ReportService
     public function toHtml($doc, $parameters)
     {
         $this->report->setTemplate('invoice.html.twig');
-        $html = $this->report->build($doc, $parameters);
+        $html = $this->report->render($doc, $parameters);
 
         return $html;
     }
