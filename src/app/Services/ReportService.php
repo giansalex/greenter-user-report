@@ -9,7 +9,7 @@
 namespace Greenter\App\Services;
 
 use Greenter\Report\HtmlReport;
-use Greenter\Xml\ParserResolver;
+use Greenter\Xml\Parser\InvoiceParser;
 
 class ReportService
 {
@@ -36,7 +36,7 @@ class ReportService
     {
         $doc = new \DOMDocument();
         $doc->loadXML($xml);
-        $parser = self::getParser($doc);
+        $parser = self::getParser();
         if (empty($parser)) {
             throw new \Exception('not found parser for xml');
         }
@@ -57,11 +57,8 @@ class ReportService
         return $html;
     }
 
-    private function getParser(\DOMDocument $document)
+    private function getParser()
     {
-        $resolver = new ParserResolver();
-        $resolver->load($document);
-
-        return $resolver->getParser();
+       return new InvoiceParser();
     }
 }
