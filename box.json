@@ -10,7 +10,7 @@
         }
     ],
     "main" : "public/index.php",
-    "output": "sufel.phar",
+    "output": "report.phar",
     "stub": true,
     "web": false,
     "banner": "Greenter",

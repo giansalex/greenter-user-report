@@ -2,13 +2,13 @@
 $curren_dir = __DIR__;
 return [
     'settings' => [
-        'displayErrorDetails' => false, // set to false in production
+        'displayErrorDetails' => true, // set to false in production
         'addContentLengthHeader' => false, // Allow the web server to send the content-length header
 
         // Renderer settings
         'renderer' => [
             'template_path' => $curren_dir . '/../templates/',
-            'cache_dir' => $curren_dir . '/../logs/cache',
+            'cache_dir' => false,
         ],
 
         'database' => [
@@ -19,7 +19,7 @@ return [
 
         'report' => [
             'template_path' => $curren_dir . '/app/Templates/',
-            'cache_dir' => $curren_dir . '/../logs/cache',
+            'cache_dir' => false,
         ],
 
         'pdf' => [
@@ -35,8 +35,8 @@ return [
         // Monolog settings
         'logger' => [
             'name' => 'slim-app',
-            'path' => isset($_ENV['docker']) ? 'php://stdout' : $curren_dir . '/../logs/app.log',
-            'level' => \Monolog\Logger::INFO,
+            'path' => __DIR__.'/../logs',
+            'level' => Psr\Log\LogLevel::DEBUG,
         ],
 
         'upload_dir' => $curren_dir . '/../upload'

@@ -6,15 +6,20 @@ use Greenter\App\Controllers\ReportController;
 use Greenter\App\Controllers\SecurityController;
 use Greenter\App\Middlewares\SessionMiddleware;
 use Greenter\App\Repository\UserRepository;
+use Greenter\Parser\DocumentParserInterface;
+use Greenter\Report\HtmlReport;
+use Greenter\Report\PdfReport;
+use Greenter\Report\ReportInterface;
+use Greenter\Xml\Parser\InvoiceParser;
+use Greenter\Xml\Parser\NoteParser;
 
 $container = $app->getContainer();
 
 // monolog
 $container['logger'] = function ($c) {
     $settings = $c->get('settings')['logger'];
-    $logger = new Monolog\Logger($settings['name']);
-    $logger->pushProcessor(new Monolog\Processor\UidProcessor());
-    $logger->pushHandler(new Monolog\Handler\StreamHandler($settings['path'], $settings['level']));
+    $logger = new Katzgrau\KLogger\Logger($settings['path'], $settings['level'], ['extension' => 'log']);
+
     return $logger;
 };
 
@@ -33,7 +38,7 @@ $container['view'] = function ($c) {
 
 $container['html_report'] = function ($c) {
     $settings = $c->get('settings')['report'];
-    return new \Greenter\Report\HtmlReport($settings['template_path'], ['cache' => $settings['cache_dir']]);
+    return new \Greenter\Report\HtmlReport('', ['cache' => $settings['cache_dir']]);
 };
 
 // Repositories
@@ -47,12 +52,8 @@ $container['user_repository'] = function ($c) {
 $container['user_service'] = function ($c) {
     return new \Greenter\App\Services\UserService($c->get('user_repository'));
 };
-$container['report_service'] = function ($c) {
-    return new \Greenter\App\Services\ReportService($c->get('html_report'));
-};
-$container['pdf_service'] = function ($c) {
-    $settings = $c->get('settings')['pdf'];
-    return new \Greenter\App\Services\PdfService($settings['bin'], $settings['options']);
+$container[DocumentParserInterface::class] = function ($c) {
+    return new \Greenter\App\Services\XmlParser($c);
 };
 
 $container[HomeController::class] = function($c) {
@@ -67,11 +68,34 @@ $container[SecurityController::class] = function($c) {
         $c->get("user_service"),
         $c->get("router"));
 };
+
+$container[ReportInterface::class] = function ($c) {
+    $settings = $c->get('settings');
+    $html = new HtmlReport('', [
+        'cache' => $settings['report']['cache_dir'],
+        //'strict_variables' => true,
+    ]);
+    $html->setTemplate('invoice2.html.twig');
+    $render = new PdfReport($html);
+    $render->setOptions($settings['pdf']['options']);
+    $render->setBinPath(($settings['pdf']['bin']));
+
+    return $render;
+};
+
+$container[InvoiceParser::class] = function () {
+    return new InvoiceParser();
+};
+
+$container[NoteParser::class] = function () {
+    return new NoteParser();
+};
+
 $container[ReportController::class] = function($c) {
     return new ReportController(
         $c->get("user_repository"),
-        $c->get("report_service"),
-        $c->get("pdf_service"),
+        $c->get(DocumentParserInterface::class),
+        $c->get(ReportInterface::class),
         $c->get('settings')['upload_dir']);
 };
 
