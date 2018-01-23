@@ -10,6 +10,7 @@ use Greenter\Parser\DocumentParserInterface;
 use Greenter\Report\HtmlReport;
 use Greenter\Report\PdfReport;
 use Greenter\Report\ReportInterface;
+use Greenter\Report\XmlUtils;
 use Greenter\Xml\Parser\InvoiceParser;
 use Greenter\Xml\Parser\NoteParser;
 
@@ -83,6 +84,10 @@ $container[ReportInterface::class] = function ($c) {
     return $render;
 };
 
+$container['xmlutils'] = function () {
+    return new XmlUtils();
+};
+
 $container[InvoiceParser::class] = function () {
     return new InvoiceParser();
 };
@@ -96,6 +101,7 @@ $container[ReportController::class] = function($c) {
         $c->get("user_repository"),
         $c->get(DocumentParserInterface::class),
         $c->get(ReportInterface::class),
+        $c->get('xmlutils'),
         $c->get('settings')['upload_dir']);
 };
 

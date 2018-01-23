@@ -13,6 +13,7 @@ use Greenter\App\Repository\UserRepository;
 use Greenter\Model\Sale\BaseSale;
 use Greenter\Parser\DocumentParserInterface;
 use Greenter\Report\ReportInterface;
+use Greenter\Report\XmlUtils;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use Slim\Http\UploadedFile;
@@ -35,17 +36,23 @@ class ReportController
      * @var DocumentParserInterface
      */
     private $parser;
+    /**
+     * @var XmlUtils
+     */
+    private $utils;
 
     public function __construct(
         UserRepository $repository,
         DocumentParserInterface $parser,
         ReportInterface $report,
+        XmlUtils $utils,
         $uploadDir)
     {
         $this->report = $report;
         $this->uploadDir = $uploadDir;
         $this->repository = $repository;
         $this->parser = $parser;
+        $this->utils = $utils;
     }
 
     /**
@@ -77,6 +84,7 @@ class ReportController
             'user' => [
                 'resolucion' => '-',
                 'header' => 'Email: <b>'.$user->getEmail().'</b>',
+                'footer' => '<p style="font-size: 8pt">Código Hash '.$this->utils->getHashSign($xml).'</p>',
             ]
         ];
         $pdfRaw = $this->report->render($inv, $params);
