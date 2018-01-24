@@ -1,12 +1,16 @@
-# User Report - Greenter 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ed651967c03a474eab6a26ac9346af8e)](https://www.codacy.com/app/giansalex/greenter-user-report?utm_source=github.com&utm_medium=referral&utm_content=giansalex/greenter-user-report&utm_campaign=badger)
-[![Travis-CI](https://img.shields.io/travis/giansalex/greenter-user-report.svg?branch=master&style=flat-square)](https://travis-ci.org/giansalex/greenter-user-report)   
-Creacion de reportes apartir del Comprobante Electrónico (XML file).
+# Sue 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ea15c73b34db4e67a7493472ada0d56d)](https://www.codacy.com/app/giansalex/sue?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=giansalex/sue&amp;utm_campaign=Badge_Grade)
+[![Travis-CI](https://img.shields.io/travis/giansalex/sue.svg?branch=master&style=flat-square)](https://travis-ci.org/giansalex/sue)  
+Creación de reportes apartir del Comprobante Electrónico (XML file) basado en Greenter packages.
 
-## Caracteristicas
-- Logo de la Empresa
+## Features
+- Logo de Empresa
 
-## Documentos Disponibles
+## Format
+- HTML
+- PDF
+
+## Supported Documents 
 - Factura Electrónica
 - Boleta Electrónica
 - Nota de Crédito Electrónica

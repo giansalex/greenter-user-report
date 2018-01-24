@@ -72,7 +72,7 @@ class ReportController
         $user = $request->getAttribute('user');
         $setting = $this->repository->getSetting($user->getId());
         $logo_path = $this->uploadDir . DIRECTORY_SEPARATOR . $setting->getLogo();
-        $logo = file_get_contents($logo_path);
+        $logo = file_exists($logo_path) ? file_get_contents($logo_path) : '';
 
         /**@var $inv BaseSale */
         $inv = $this->parser->parse($xml);

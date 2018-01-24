@@ -1,8 +1,8 @@
 {
-    "name": "greenter/user-report",
-    "description": "A Greenter Report for final users.",
+    "name": "greenter/sue",
+    "description": "A Greenter Report (HTML, PDF) for final users.",
     "keywords": ["greenter", "rest", "report"],
-    "homepage": "http://github.com/giansalex/greenter-user-report",
+    "homepage": "http://github.com/giansalex/sue",
     "license": "MIT",
     "authors": [
         {
