@@ -23,19 +23,19 @@ return [
         ],
 
         'pdf' => [
-            'bin' => $curren_dir . '/../wkhtmltopdf.exe',
+            'bin' => 'wkhtmltopdf',
             'options' => [
                 'no-outline', // Make Chrome not complain
                 //'viewport-size' => '1280x1024',
                 //'page-width' => '21cm',
-                //'page-height' => '29cm',
+                //'page-height' => '29.7cm',
                 'footer-html' => $curren_dir . '/app/Templates/footer.html',
             ]
         ],
         // Monolog settings
         'logger' => [
             'name' => 'slim-app',
-            'path' => __DIR__.'/../logs',
+            'path' => 'php://stdout',
             'level' => Psr\Log\LogLevel::INFO,
         ],
 

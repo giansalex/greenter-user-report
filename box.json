@@ -13,6 +13,6 @@
     "output": "report.phar",
     "stub": true,
     "web": false,
-    "banner": "Greenter",
+    "banner": "Greenter Sue",
     "shebang": false
 }

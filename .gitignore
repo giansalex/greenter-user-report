@@ -1,4 +1,6 @@
-.idea/
-vendor
+/.idea/
+/vendor/
+/upload/
+!/upload/.htaccess
 *.sqlite
 wkhtmltopdf.exe
