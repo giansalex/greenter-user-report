@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Giansalex
  * Date: 08/10/2017
- * Time: 20:04
+ * Time: 20:04.
  */
 
 namespace Greenter\App\Services;
@@ -26,6 +26,7 @@ class UserService
 
     /**
      * Security constructor.
+     *
      * @param UserRepository $repository
      */
     public function __construct(UserRepository $repository)
@@ -36,7 +37,7 @@ class UserService
     public function register($email, $password)
     {
         if ($this->repository->exist($email)) {
-            return FALSE;
+            return false;
         }
         $user = new User();
         $user->setEmail($email)
@@ -53,7 +54,7 @@ class UserService
     public function login($email, $password)
     {
         $user = $this->repository->get($email, $password);
-        if ($user === FALSE) {
+        if ($user === false) {
             return false;
         }
         $this->saveSession($user);

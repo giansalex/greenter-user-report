@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Giansalex
  * Date: 08/10/2017
- * Time: 19:58
+ * Time: 19:58.
  */
 
 namespace Greenter\App\Repository;
@@ -25,6 +25,7 @@ class DbConnection
 
     /**
      * DbConnection constructor.
+     *
      * @param string $dsn
      * @param string $user
      * @param string $pass
@@ -41,6 +42,6 @@ class DbConnection
      */
     public function createConnection()
     {
-        return new \PDO($this->dsn, $this->user,$this->pass);
+        return new \PDO($this->dsn, $this->user, $this->pass);
     }
 }

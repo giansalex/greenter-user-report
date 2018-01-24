@@ -1,4 +1,5 @@
 <?php
+
 // DIC configuration
 
 use Greenter\App\Controllers\HomeController;
@@ -31,7 +32,7 @@ $container['view'] = function ($c) {
         'cache' => $settings['cache_dir'],
     ]);
     // Instantiate and add Slim specific extension
-    $basePath = rtrim(str_ireplace('index.php','', $c['request']->getUri()->getBasePath()), '/');
+    $basePath = rtrim(str_ireplace('index.php', '', $c['request']->getUri()->getBasePath()), '/');
     $view->addExtension(new Slim\Views\TwigExtension($c['router'], $basePath));
 
     return $view;
@@ -39,6 +40,7 @@ $container['view'] = function ($c) {
 
 $container['html_report'] = function ($c) {
     $settings = $c->get('settings')['report'];
+
     return new \Greenter\Report\HtmlReport('', ['cache' => $settings['cache_dir']]);
 };
 
@@ -57,17 +59,19 @@ $container[DocumentParserInterface::class] = function ($c) {
     return new \Greenter\App\Services\XmlParser($c);
 };
 
-$container[HomeController::class] = function($c) {
+$container[HomeController::class] = function ($c) {
     return new HomeController(
-        $c->get("view"),
-        $c->get("user_repository"),
-        $c->get('settings')['upload_dir']);
+        $c->get('view'),
+        $c->get('user_repository'),
+        $c->get('settings')['upload_dir']
+    );
 };
-$container[SecurityController::class] = function($c) {
+$container[SecurityController::class] = function ($c) {
     return new SecurityController(
-        $c->get("view"),
-        $c->get("user_service"),
-        $c->get("router"));
+        $c->get('view'),
+        $c->get('user_service'),
+        $c->get('router')
+    );
 };
 
 $container[ReportInterface::class] = function ($c) {
@@ -96,15 +100,16 @@ $container[NoteParser::class] = function () {
     return new NoteParser();
 };
 
-$container[ReportController::class] = function($c) {
+$container[ReportController::class] = function ($c) {
     return new ReportController(
-        $c->get("user_repository"),
+        $c->get('user_repository'),
         $c->get(DocumentParserInterface::class),
         $c->get(ReportInterface::class),
         $c->get('xmlutils'),
-        $c->get('settings')['upload_dir']);
+        $c->get('settings')['upload_dir']
+    );
 };
 
-$container[SessionMiddleware::class] = function($c) {
+$container[SessionMiddleware::class] = function ($c) {
     return new SessionMiddleware($c);
 };

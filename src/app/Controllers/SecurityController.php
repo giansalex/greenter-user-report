@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Giansalex
  * Date: 08/10/2017
- * Time: 19:28
+ * Time: 19:28.
  */
 
 namespace Greenter\App\Controllers;
@@ -32,23 +32,24 @@ class SecurityController
     public function __construct(
         Twig $view,
         UserService $service,
-        Router $router) {
-
+        Router $router
+    ) {
         $this->view = $view;
         $this->service = $service;
         $this->router = $router;
     }
 
     /**
-     * @param Request    $request
-     * @param Response   $response
-     * @param array $args
+     * @param Request  $request
+     * @param Response $response
+     * @param array    $args
+     *
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function login($request, $response, $args)
     {
         $input = $request->getParsedBody();
-        $params =  [];
+        $params = [];
         if (isset($input) &&
             isset($input['pass'])) {
             $result = $this->service->login($input['email'], $input['pass']);
@@ -59,13 +60,15 @@ class SecurityController
             $params['invalid'] = true;
             $params['email'] = $input['email'];
         }
+
         return $this->view->render($response, 'security/login.html.twig', $params);
     }
 
     /**
-     * @param Request    $request
-     * @param Response   $response
-     * @param array $args
+     * @param Request  $request
+     * @param Response $response
+     * @param array    $args
+     *
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function register($request, $response, $args)
@@ -86,14 +89,16 @@ class SecurityController
     }
 
     /**
-     * @param Request    $request
-     * @param Response   $response
-     * @param array $args
+     * @param Request  $request
+     * @param Response $response
+     * @param array    $args
+     *
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function logout($request, $response, $args)
     {
         $this->service->logout();
+
         return $response->withRedirect($this->router->pathFor('login'));
     }
 }

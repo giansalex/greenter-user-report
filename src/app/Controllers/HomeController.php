@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Giansalex
  * Date: 08/10/2017
- * Time: 19:13
+ * Time: 19:13.
  */
 
 namespace Greenter\App\Controllers;
@@ -31,16 +31,18 @@ class HomeController
      */
     private $pathUpload;
 
-    public function __construct(Twig $view, UserRepository $repository, $pathUpload) {
+    public function __construct(Twig $view, UserRepository $repository, $pathUpload)
+    {
         $this->view = $view;
         $this->repository = $repository;
         $this->pathUpload = $pathUpload;
     }
 
     /**
-     * @param Request    $request
-     * @param Response   $response
-     * @param array $args
+     * @param Request  $request
+     * @param Response $response
+     * @param array    $args
+     *
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function index($request, $response, $args)
@@ -49,25 +51,26 @@ class HomeController
     }
 
     /**
-     * @param Request    $request
-     * @param Response   $response
-     * @param array $args
+     * @param Request  $request
+     * @param Response $response
+     * @param array    $args
+     *
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function setting($request, $response, $args)
     {
-        /**@var $user User*/
+        /** @var $user User */
         $user = $request->getAttribute('user');
         $setting = $this->repository->getSetting($user->getId());
         $params = [];
         if ($request->isPost()) {
             $files = $request->getUploadedFiles();
-            /**@var $uploadedFile UploadedFile*/
+            /** @var $uploadedFile UploadedFile */
             $uploadedFile = $files['logo'];
             if ($uploadedFile->getError() === UPLOAD_ERR_OK) {
                 $filename = $this->moveUploadedFile($this->pathUpload, $uploadedFile);
                 if ($setting->getLogo()) {
-                    $old_file = $this->pathUpload . DIRECTORY_SEPARATOR . $setting->getLogo();
+                    $old_file = $this->pathUpload.DIRECTORY_SEPARATOR.$setting->getLogo();
                     unlink($old_file);
                 }
 
@@ -82,25 +85,27 @@ class HomeController
         }
 
         $params['setting'] = $setting;
+
         return $this->view->render($response, 'home/setting.html.twig', $params);
     }
 
     /**
-     * @param Request    $request
-     * @param Response   $response
-     * @param array $args
+     * @param Request  $request
+     * @param Response $response
+     * @param array    $args
+     *
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function image($request, $response, $args)
     {
-        /**@var $user User*/
+        /** @var $user User */
         $user = $request->getAttribute('user');
         $setting = $this->repository->getSetting($user->getId());
 
         if (empty($setting->getLogo())) {
             return $response->withStatus(404);
         }
-        $image = $this->pathUpload . DIRECTORY_SEPARATOR . $setting->getLogo();
+        $image = $this->pathUpload.DIRECTORY_SEPARATOR.$setting->getLogo();
 
         $response = $response->withHeader('Content-Type', $this->getMimeType($setting->getLogo()));
         $response->getBody()->write(file_get_contents($image));
@@ -114,14 +119,15 @@ class HomeController
         $basename = md5(uniqid('i_'));
         $filename = sprintf('%s.%0.8s', $basename, $extension);
 
-        $uploadedFile->moveTo($directory . DIRECTORY_SEPARATOR . $filename);
+        $uploadedFile->moveTo($directory.DIRECTORY_SEPARATOR.$filename);
 
         return $filename;
     }
 
-    function getMimeType($filename)
+    public function getMimeType($filename)
     {
         $ext = strtolower(array_pop(explode('.', $filename)));
-        return 'image/' . $ext;
+
+        return 'image/'.$ext;
     }
 }

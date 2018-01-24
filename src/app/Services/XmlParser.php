@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Giansalex
  * Date: 08/10/2017
- * Time: 20:07
+ * Time: 20:07.
  */
 
 namespace Greenter\App\Services;
@@ -28,6 +28,7 @@ class XmlParser implements DocumentParserInterface
 
     /**
      * ReportService constructor.
+     *
      * @param ContainerInterface $container
      */
     public function __construct(ContainerInterface $container)
@@ -37,7 +38,9 @@ class XmlParser implements DocumentParserInterface
 
     /**
      * @param string $value
+     *
      * @return DocumentInterface
+     *
      * @throws \Exception
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
@@ -71,6 +74,7 @@ class XmlParser implements DocumentParserInterface
 
     /**
      * @param $xml
+     *
      * @return \DOMDocument
      */
     public function getDocument($xml)

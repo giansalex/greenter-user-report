@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Giansalex
  * Date: 08/10/2017
- * Time: 20:46
+ * Time: 20:46.
  */
 
 namespace Greenter\App\Controllers;
@@ -46,8 +46,8 @@ class ReportController
         DocumentParserInterface $parser,
         ReportInterface $report,
         XmlUtils $utils,
-        $uploadDir)
-    {
+        $uploadDir
+    ) {
         $this->report = $report;
         $this->uploadDir = $uploadDir;
         $this->repository = $repository;
@@ -56,9 +56,10 @@ class ReportController
     }
 
     /**
-     * @param Request    $request
-     * @param Response   $response
-     * @param array $args
+     * @param Request  $request
+     * @param Response $response
+     * @param array    $args
+     *
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function index($request, $response, $args)
@@ -68,13 +69,13 @@ class ReportController
             return $response->withStatus(400);
         }
 
-        /**@var $user User */
+        /** @var $user User */
         $user = $request->getAttribute('user');
         $setting = $this->repository->getSetting($user->getId());
-        $logo_path = $this->uploadDir . DIRECTORY_SEPARATOR . $setting->getLogo();
+        $logo_path = $this->uploadDir.DIRECTORY_SEPARATOR.$setting->getLogo();
         $logo = file_exists($logo_path) ? file_get_contents($logo_path) : '';
 
-        /**@var $inv BaseSale */
+        /** @var $inv BaseSale */
         $inv = $this->parser->parse($xml);
 
         $params = [
@@ -85,7 +86,7 @@ class ReportController
                 'resolucion' => '-',
                 'header' => 'Email: <b>'.$user->getEmail().'</b>',
                 'footer' => '<p style="font-size: 8pt">Código Hash '.$this->utils->getHashSign($xml).'</p>',
-            ]
+            ],
         ];
         $pdfRaw = $this->report->render($inv, $params);
 
@@ -104,7 +105,7 @@ class ReportController
     private function getXmlFromRequest(Request $request)
     {
         $files = $request->getUploadedFiles();
-        /**@var $uploadedFile UploadedFile*/
+        /** @var $uploadedFile UploadedFile */
         if (!isset($files['xml'])) {
             return false;
         }

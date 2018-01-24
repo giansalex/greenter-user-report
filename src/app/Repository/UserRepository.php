@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Giansalex
  * Date: 08/10/2017
- * Time: 20:01
+ * Time: 20:01.
  */
 
 namespace Greenter\App\Repository;
@@ -26,11 +26,13 @@ class UserRepository extends DbConnection
         $id = $con->lastInsertId();
         $con->exec("INSERT INTO `setting`(`user_id`) VALUES($id)");
         $user->setId($id);
+
         return $user;
     }
 
     /**
      * @param string $email
+     *
      * @return bool
      */
     public function exist($email)
@@ -46,6 +48,7 @@ class UserRepository extends DbConnection
     /**
      * @param $email
      * @param $password
+     *
      * @return bool|User
      */
     public function get($email, $password)
@@ -53,27 +56,28 @@ class UserRepository extends DbConnection
         $con = $this->createConnection();
         $stm = $con->prepare('SELECT id, email, password, enable FROM `user` WHERE email=?');
         $stm->execute([$email]);
-        /**@var $obj User */
+        /** @var $obj User */
         $obj = $stm->fetchObject(User::class);
-        if ($obj === FALSE) {
-            return FALSE;
+        if ($obj === false) {
+            return false;
         }
 
         if (password_verify($password, $obj->getPassword()) && $obj->isEnable()) {
             return $obj;
         }
 
-        return FALSE;
+        return false;
     }
 
     /**
      * @param int $userId
+     *
      * @return Setting
      */
     public function getSetting($userId)
     {
         $con = $this->createConnection();
-        $res = $con->query('SELECT logo_path,parameters FROM setting WHERE user_id = ' . $userId);
+        $res = $con->query('SELECT logo_path,parameters FROM setting WHERE user_id = '.$userId);
         $obj = $res->fetchObject();
         $sett = new Setting();
         $sett->setIdUser($userId)
@@ -95,7 +99,7 @@ class UserRepository extends DbConnection
         $stm = $con->prepare('UPDATE setting SET logo_path = ?, parameters = ? WHERE user_id = '.$setting->getIdUser());
         $stm->execute([
             $setting->getLogo(),
-            json_encode($setting->getParameters())
+            json_encode($setting->getParameters()),
         ]);
     }
 }

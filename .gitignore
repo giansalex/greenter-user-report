@@ -3,4 +3,5 @@
 /upload/
 !/upload/.htaccess
 *.sqlite
-wkhtmltopdf.exe
+/wkhtmltopdf.exe
+/.php_cs.cache
