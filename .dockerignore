@@ -1,0 +1,16 @@
+.git
+.idea
+vendor
+tests
+.gitignore
+.gitattributes
+.php_cs.cache
+.php_cs.dist
+.travis.yml
+box.json
+docker-compose.yml
+git_pull.sh
+phpunit.xml
+wkhtmltopdf.exe
+xmltopdf.sqlite
+README.md
