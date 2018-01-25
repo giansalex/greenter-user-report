@@ -2,6 +2,7 @@ FROM php:7.0-apache
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends wkhtmltopdf wget libxml2-dev zlib1g-dev git zip unzip libfreetype6-dev libjpeg62-turbo-dev && \
+    docker-php-ext-install pdo && \
     docker-php-ext-configure opcache --enable-opcache && \
     docker-php-ext-install opcache && \
     docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
