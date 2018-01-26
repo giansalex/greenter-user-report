@@ -6,7 +6,9 @@ use Greenter\App\Controllers\HomeController;
 use Greenter\App\Controllers\ReportController;
 use Greenter\App\Controllers\SecurityController;
 use Greenter\App\Middlewares\SessionMiddleware;
+use Greenter\App\Repository\DbConnection;
 use Greenter\App\Repository\UserRepository;
+use Greenter\App\Services\PdoErrorLogger;
 use Greenter\Parser\DocumentParserInterface;
 use Greenter\Report\HtmlReport;
 use Greenter\Report\PdfReport;
@@ -23,6 +25,10 @@ $container['logger'] = function ($c) {
     $logger = new Katzgrau\KLogger\Logger($settings['path'], $settings['level'], ['extension' => 'log']);
 
     return $logger;
+};
+
+$container[PdoErrorLogger::class] = function ($c) {
+    return new PdoErrorLogger($c->get('logger'));
 };
 
 // view renderer
@@ -45,10 +51,14 @@ $container['html_report'] = function ($c) {
 };
 
 // Repositories
-$container['user_repository'] = function ($c) {
+$container[DbConnection::class] = function ($c) {
     $db = $c->get('settings')['database'];
 
-    return new UserRepository($db['dsn'], $db['user'], $db['pass']);
+    return new DbConnection($db['dsn'], $db['user'], $db['pass']);
+};
+
+$container['user_repository'] = function ($c) {
+    return new UserRepository($c);
 };
 
 // Services

@@ -40,7 +40,7 @@ class DbConnection
     /**
      * @return \PDO
      */
-    public function createConnection()
+    public function getConnection()
     {
         return new \PDO($this->dsn, $this->user, $this->pass);
     }

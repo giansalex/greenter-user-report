@@ -84,7 +84,7 @@ class ReportController
             ],
             'user' => [
                 'resolucion' => '-',
-                'header' => 'Email: <b>'.$user->getEmail().'</b>',
+//                'header' => 'Email: <b>'.$user->getEmail().'</b>',
                 'footer' => '<p style="font-size: 8pt">Código Hash '.$this->utils->getHashSign($xml).'</p>',
             ],
         ];
@@ -93,11 +93,8 @@ class ReportController
         $response->getBody()->write($pdfRaw);
         $response = $response
             ->withHeader('Content-Type', 'application/pdf')
-            ->withHeader('Content-Disposition', 'inline;filename="invoice.pdf"')
-            ->withHeader('Content-Length', strlen($pdfRaw))
-            ->withoutHeader('Pragma')
-            ->withoutHeader('Expires')
-            ->withoutHeader('Cache-Control');
+            ->withHeader('Content-Disposition', 'attachment;filename="'.$inv->getName().'.pdf"')
+            ->withHeader('Content-Length', strlen($pdfRaw));
 
         return $response;
     }

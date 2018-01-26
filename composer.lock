@@ -131,16 +131,16 @@
         },
         {
             "name": "greenter/core",
-            "version": "v1.2.1",
+            "version": "v1.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/giansalex/greenter-core.git",
-                "reference": "a557e2e844491fb788e13e4d7c2d1c220ba148c9"
+                "reference": "41f127f0057d63cbc7e5c26dd49a2f9b0400e001"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/giansalex/greenter-core/zipball/a557e2e844491fb788e13e4d7c2d1c220ba148c9",
-                "reference": "a557e2e844491fb788e13e4d7c2d1c220ba148c9",
+                "url": "https://api.github.com/repos/giansalex/greenter-core/zipball/41f127f0057d63cbc7e5c26dd49a2f9b0400e001",
+                "reference": "41f127f0057d63cbc7e5c26dd49a2f9b0400e001",
                 "shasum": ""
             },
             "require": {
@@ -169,7 +169,7 @@
                 "greenter",
                 "sunat"
             ],
-            "time": "2018-01-23T22:17:51+00:00"
+            "time": "2018-01-25T21:41:13+00:00"
         },
         {
             "name": "greenter/htmltopdf",
@@ -224,16 +224,16 @@
         },
         {
             "name": "greenter/report",
-            "version": "v1.2.1",
+            "version": "v1.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/giansalex/greenter-report.git",
-                "reference": "c962a4c07fd15b996471a66ed9da51abf41bb61e"
+                "reference": "aa471d22b4b7e2906925efcd21f85e46bb8a7b75"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/giansalex/greenter-report/zipball/c962a4c07fd15b996471a66ed9da51abf41bb61e",
-                "reference": "c962a4c07fd15b996471a66ed9da51abf41bb61e",
+                "url": "https://api.github.com/repos/giansalex/greenter-report/zipball/aa471d22b4b7e2906925efcd21f85e46bb8a7b75",
+                "reference": "aa471d22b4b7e2906925efcd21f85e46bb8a7b75",
                 "shasum": ""
             },
             "require": {
@@ -269,20 +269,20 @@
                 "pdf",
                 "sunat"
             ],
-            "time": "2018-01-24T18:25:21+00:00"
+            "time": "2018-01-25T22:13:19+00:00"
         },
         {
             "name": "greenter/xml-parser",
-            "version": "v1.1.1",
+            "version": "v1.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/giansalex/greenter-xml-parser.git",
-                "reference": "32f9099fc0b468072024835080221fffb1ad9bd8"
+                "reference": "2ed6a753974ee680c7c40031fae16d207611e1cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/giansalex/greenter-xml-parser/zipball/32f9099fc0b468072024835080221fffb1ad9bd8",
-                "reference": "32f9099fc0b468072024835080221fffb1ad9bd8",
+                "url": "https://api.github.com/repos/giansalex/greenter-xml-parser/zipball/2ed6a753974ee680c7c40031fae16d207611e1cc",
+                "reference": "2ed6a753974ee680c7c40031fae16d207611e1cc",
                 "shasum": ""
             },
             "require": {
@@ -319,7 +319,7 @@
                 "sunat",
                 "xml"
             ],
-            "time": "2018-01-24T00:32:48+00:00"
+            "time": "2018-01-26T00:26:57+00:00"
         },
         {
             "name": "katzgrau/klogger",

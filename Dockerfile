@@ -25,6 +25,9 @@ RUN php docker/db.php
 RUN cd /var/www/html && \
     chmod -R 777 logs/ && \
     chmod -R 777 upload/ && \
+    chown www-data upload/ && \
+    chmod g+rws upload/ && \
+    chmod 777 xmltopdf.sqlite && \
     cp -f docker/.htaccess . && \
     cp -f docker/settings.php src/ && \
     composer install --no-interaction --no-dev --optimize-autoloader && \
