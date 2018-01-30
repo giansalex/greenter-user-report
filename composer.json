@@ -15,7 +15,7 @@
         "slim/slim": "^3.1",
         "katzgrau/klogger": "^1.2",
         "slim/twig-view": "^2.3",
-        "greenter/xml-parser": "^1.1",
+        "greenter/xml-parser": "^1.2",
         "greenter/report": "^1.2",
         "akrabat/rka-slim-session-middleware": "^2.0",
         "greenter/htmltopdf": "^1.0"

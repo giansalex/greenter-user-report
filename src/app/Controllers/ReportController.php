@@ -73,7 +73,7 @@ class ReportController
         $user = $request->getAttribute('user');
         $setting = $this->repository->getSetting($user->getId());
         $logo_path = $this->uploadDir.DIRECTORY_SEPARATOR.$setting->getLogo();
-        $logo = file_exists($logo_path) ? file_get_contents($logo_path) : '';
+        $logo = file_get_contents(file_exists($logo_path) ? $logo_path: __DIR__.'/../../../public/favicon.ico');
 
         /** @var $inv BaseSale */
         $inv = $this->parser->parse($xml);
@@ -81,11 +81,12 @@ class ReportController
         $params = [
             'system' => [
                 'logo' => $logo,
+                'hash' => $this->utils->getHashSign($xml),
             ],
             'user' => [
                 'resolucion' => '-',
 //                'header' => 'Email: <b>'.$user->getEmail().'</b>',
-                'footer' => '<p style="font-size: 8pt">Código Hash '.$this->utils->getHashSign($xml).'</p>',
+//                'footer' => '<p style="font-size: 8pt">Código Hash </p>',
             ],
         ];
         $pdfRaw = $this->report->render($inv, $params);
