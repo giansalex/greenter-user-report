@@ -15,3 +15,8 @@ Creación de reportes apartir del Comprobante Electrónico (XML file) basado en 
 - Boleta Electrónica
 - Nota de Crédito Electrónica
 - Nota de Débito Electrónica
+- Retención Electrónica
+- Percepción Electrónica
+- Resumen Diario de Boletas
+- Comunicación de Bajas
+- Resumen de Reversiones
