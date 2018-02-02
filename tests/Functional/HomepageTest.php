@@ -5,7 +5,7 @@ namespace Tests\Functional;
 class HomepageTest extends BaseTestCase
 {
     /**
-     * Test that the index route returns a rendered response containing the text 'SlimFramework' but not a greeting
+     * Test that the login route returns a rendered response containing the text 'Login'
      */
     public function testGetLoginPage()
     {
