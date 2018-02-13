@@ -6,9 +6,11 @@ Creación de reportes apartir del Comprobante Electrónico (XML file) basado en 
 ## Features
 - Logo de Empresa
 
-## Format
-- HTML
-- PDF
+## Output Formats
+- [x] HTML
+- [x] PDF
+- [ ] Microsoft Word
+- [ ] Microsoft Excel
 
 ## Supported Documents 
 - Factura Electrónica
